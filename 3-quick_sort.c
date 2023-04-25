@@ -2,9 +2,9 @@
 #include<stdio.h>
 
 /**
- * swap_pos - swaps  valiue's position in array
+ * swap_pos - swapsarray values
  *
- * @array: array to be changed
+ * @array: array to edit
  * @first: first index
  * @second: second index
  */
@@ -18,52 +18,51 @@ void swap_pos(int **array, size_t first, size_t second)
 }
 
 /**
- * partition - divides array into two parts
- * lower and higher
+ * partition - splits the array parts lower than and higher
  *
  * @array: array to be sorted
  * @lower: lower boundary
  * @upper: upper boundary
  * @size: size of the array
  *
- * Return: index of sorted pivot
+ * Return: sorted pivot index
  */
 size_t partition(int **array, size_t lower, size_t upper, size_t size)
 {
-	size_t initial, sequential, pivot;
+	size_t before, after, pivot;
 
 	pivot = upper;
-	lb = lower;
+	before = lower;
 
-	for (sequential = initial; sequential < pivot; sequential++)
+	for (after = before; after < upper; after++)
 	{
-		/* check if sequential is lesser than pivot */
-		if ((*array)[sequential] <= (*array)[pivot])
+		/* check if array after is lesser than array pivot */
+		if ((*array)[after] <= (*array)[pivot])
 		{
-			if (initial != sequential)
+			if (before != after)
 			{
-				swap_pos(array, initial, sequential);
+				swap_pos(array, before, after);
 				print_array(*array, size);
 			}
-			initial += 1;
+			before += 1;
 		}
 	}
 
 	/* swap pivot to its original position */
-	if (initial != sequential)
+	if (before != after)
 	{
-		swap_pos(array, initial, sequential);
+		swap_pos(array, before, after);
 		print_array(*array, size);
 	}
-	return (initial);
+	return (before);
 }
 /**
- * sorter - sorts array recursively
+ * sorter - sorts given array
  *
  * @array: array to be sorted
  * @lb: lower bound
  * @ub: upper bound
- * @size: size of the array
+ * @size: array size
  */
 void sorter(int **array, size_t lb, size_t ub, size_t size)
 {
@@ -75,16 +74,20 @@ void sorter(int **array, size_t lb, size_t ub, size_t size)
 		sorted_index = partition(array, lb, ub, size);
 
 		/* perform recursive sort */
-		if (sorted_index - lb > 1)	/* more than one element present */
-			sorter(array, lb, sorted_index - 1, size);    /* sorts lower boundary */
-
+		if (sorted_index - lb > 1)
+		{
+			sorter(array, lb, sorted_index - 1, size);
+		}
 		if (ub - sorted_index > 1)
-			sorter(array, sorted_index + 1, ub, size);    /* sort upper boundary */
+		{
+			sorter(array, sorted_index + 1, ub, size);
+		}
 	}
 }
 
 /**
- * quick_sort - applies quick sort to given array
+ * quick_sort - applies the quick sort algorithm to sort
+ * a given array
  *
  * @array: array to be sorted
  * @size: size of the array
@@ -93,6 +96,6 @@ void quick_sort(int *array, size_t size)
 {
 	if (!array || size < 2)
 		return;
-	/* create the sorter function */
+	/* sorter function to sort the array */
 	sorter(&array, 0, size - 1, size);
 }
