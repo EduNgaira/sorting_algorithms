@@ -90,7 +90,7 @@ void counting_sort(int *array, size_t size)
 	}
 	free(sumPosition);
 
-	for (k = 0; k < size; k++) 
+	for (k = 0; k < size; k++)
 		array[k] = sorted[k];
 	free(sorted);
 }
