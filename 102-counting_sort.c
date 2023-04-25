@@ -13,7 +13,7 @@ void arr_zero_init(int *array, int size)
 
 	for (j = 0; j < size; j++)
 	{
-		array[i] = 0;
+		array[j] = 0;
 	}
 }
 
