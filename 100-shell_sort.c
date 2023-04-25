@@ -4,72 +4,71 @@
 /**
  * find_pow - power of a number
  * @x: the number
- * @y: power value
+ * @y: the value of power
  *
  * Return: the power of x
  */
 int find_pow(int x, size_t y)
 {
-	if (y == NULL)
+	if (y == 0)
 		return (1);
-	else
-		return (x * find_pow(x, y - 1));
+	return (x * find_pow(x, y - 1));
 }
 
 /**
  * seq_generator - generate sequence
  * @size: sequence size
  *
- * Return: pointer to the address of sequence
+ * Return: address pointer
  */
 int *seq_generator(size_t size)
 {
 	size_t n = 0;
-	int i = 0, nth_term, *sequence;
+	int j = 0, nth_term, *sequence;
 
 	sequence = malloc(sizeof(int) * size);
-	if (sequence == NULL)
+	if (sequence == 0)
 		return (NULL);
 
 	nth_term = 0;
 	while (n < size)
 	{
 		nth_term = nth_term + find_pow(3, n);
-		sequence[i] = nth_term;
+		sequence[j] = nth_term;
 		n++;
-		i++;
+		j++;
 	}
 	return (sequence);
 }
 
 /**
  * reverse_seq - reverse sequence
- * @sequence: pointer to the address of sequence
- * @size: sequence size
+ * @sequence: address pointer
+ * @size: size of sequence
  *
- * Return: reverse sequence
+ * Return: sequence in reverse
  */
 int *reverse_seq(int *sequence, size_t size)
 {
 	int *rev_seq;
-	size_t j = 0, seq_index;
+	size_t k = 0, seq_index;
 
 	rev_seq = malloc(sizeof(int) * size);
-	if (rev_seq == NULL)
+	if (rev_seq == 0)
 		return (NULL);
 
 	seq_index = size - 1;
-	while (j < size)
+	while (k < size)
 	{
-		rev_seq[j] = sequence[seq_index];
-		j++;
+		rev_seq[k] = sequence[seq_index];
+		k++;
 		seq_index--;
 	}
 	return (rev_seq);
 }
 
 /**
- * shell_sort - Shell sort algorithm
+ * shell_sort - shell sort algorithm
  * @array: array to be sorted
  * @size: size of array
  *
@@ -77,7 +76,8 @@ int *reverse_seq(int *sequence, size_t size)
  */
 void shell_sort(int *array, size_t size)
 {
-	int k, flag = 0;
+	int j;
+	int count = 0;
 	int temp, *sequence, *rev_seq, hold;
 	size_t i, seq_index = 0;
 
@@ -95,14 +95,14 @@ void shell_sort(int *array, size_t size)
 		{
 			temp = array[i];
 			hold = rev_seq[seq_index];
-			for (k = i; k >= hold && array[k - hold] > temp; k = k - hold)
+			for (j = i; j >= hold && array[j - hold] > temp; j -= hold)
 			{
-				array[k] = array[k - rev_seq[seq_index]];
+				array[j] = array[j - rev_seq[seq_index]];
 			}
-			array[k] = temp;
-			flag = 1;
+			array[j] = temp;
+			count = 1;
 		}
-		if (flag)
+		if (count)
 			print_array(array, size);
 		seq_index++;
 	}
