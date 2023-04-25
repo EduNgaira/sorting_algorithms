@@ -2,9 +2,9 @@
 #include<stdio.h>
 
 /**
- * swap_pos - swaps value positions
+ * swap_pos - swaps array of values
  *
- * @array: array to be changed
+ * @array: changing array
  * @first: first index
  * @second: second index
  */
@@ -18,32 +18,38 @@ void swap_pos(int **array, size_t first, size_t second)
 }
 
 /**
- * selection_sort - selection sorting an array
+ * selection_sort - selection sort algorithm
+ *
  * @array: array to be sorted
- * @size: size of the array
+ * @size: array size
  */
 void selection_sort(int *array, size_t size)
 {
 	size_t i, j;
-	int min, flag;
+	int min_no, min_index, temp;
+
+	if (size < 2)
+		return;
 
 	for (i = 0; i < size; i++)
 	{
-		min = i;
-		flag = 0;
+		min_no = array[i];
+		min_index = i;
+		temp = 0;
 
 		for (j = i + 1; j < size; j++)	/* start from the unsorted part */
 		{
-			if (array[min] > array[j])  /* check for min value */
+			if (min_no > array[j])  /* check min no */
 			{
-				min = j;
-				flag = 1;
+				min_no = array[j];
+				min_index = j;
+				temp = 1;
 			}
 		}
 
-		if (min != i)
+		if (temp)
 		{
-			swap_pos(&array, i, min);
+			swap_pos(&array, i, min_index);
 			print_array(array, size);
 		}
 	}
