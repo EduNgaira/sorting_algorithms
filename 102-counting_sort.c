@@ -74,7 +74,7 @@ void counting_sort(int *array, size_t size)
 	sumPosition[0] = position[0];   /* make first index equal */
 
 	for (l = 1; l < (k + 1); l++)
-		sumPosition[j] = position[j] + sumPosition[j - 1];
+		sumPosition[l] = position[l] + sumPosition[l - 1];
 
 	free(position), print_array(sumPosition, k + 1);
 
