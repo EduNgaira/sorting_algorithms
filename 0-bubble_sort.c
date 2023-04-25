@@ -44,7 +44,7 @@ void bubble_sort(int *array, size_t size)
 		}
 
 		/* check for no swapping */
-		if (temp==0)
+		if (temp == 0)
 			break;
 	}
 }
