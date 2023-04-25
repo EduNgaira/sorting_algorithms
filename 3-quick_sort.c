@@ -30,32 +30,32 @@ void swap_pos(int **array, size_t first, size_t second)
  */
 size_t partition(int **array, size_t lower, size_t upper, size_t size)
 {
-	size_t lb, ub, pivot;
+	size_t initial, sequential, pivot;
 
 	pivot = upper;
 	lb = lower;
 
-	for (ub = lb; ub < upper; ub++)
+	for (sequential = initial; sequential < pivot; sequential++)
 	{
-		/* check if ub is lesser than pivot */
-		if ((*array)[ub] <= (*array)[pivot])
+		/* check if sequential is lesser than pivot */
+		if ((*array)[sequential] <= (*array)[pivot])
 		{
-			if (lb != ub)
+			if (initial != sequential)
 			{
-				swap_pos(array, lb, ub);
+				swap_pos(array, initial, sequential);
 				print_array(*array, size);
 			}
-			ub = ub + 1;
+			initial += 1;
 		}
 	}
 
 	/* swap pivot to its original position */
-	if (ub != lb)
+	if (initial != sequential)
 	{
-		swap_pos(array, ub, lb);
+		swap_pos(array, initial, sequential);
 		print_array(*array, size);
 	}
-	return (lb);
+	return (initial);
 }
 /**
  * sorter - sorts array recursively
